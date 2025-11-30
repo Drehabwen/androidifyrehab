@@ -1,0 +1,392 @@
+/*
+  * Tailwind CSS v4 不再需要 @tailwind 指令
+  * 只需导入 "tailwindcss" 即可
+  */
+@import "tailwindcss";
+
+/*
+  * 自定义颜色变量定义
+  * 使用标准CSS自定义属性代替@theme规则以提高兼容性
+  */
+:root {
+  --color-primary: #8faa8f;
+  --color-primary-light: #a8c4a8;
+  --color-primary-soft: #c8d6c8;
+  --color-primary-white: #fefefe;
+  --color-primary-gray: #f5f7f5;
+  --color-text-primary: #2d3a2d;
+  --color-text-secondary: #5a6b5a;
+  --color-text-tertiary: #7a8a7a;
+  --color-status-success: #8faa8f;
+  --color-status-warning: #e0c15b;
+  --color-status-danger: #d48a8a;
+  --color-border: #d4ddd4;
+}
+
+/*
+  * 样式重置
+  */
+@layer base {
+  body {
+    background-color: var(--color-primary-gray);
+    color: var(--color-text-primary);
+    font-family: Inter, system-ui, sans-serif;
+  }
+  
+  /*
+    * 滚动条样式
+    */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #f3f4f6; /* gray-100 */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #d1d5db; /* gray-300 */
+    border-radius: 9999px; /* rounded-full */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af; /* gray-400 */
+  }
+}
+
+/* 自定义组件样式 */
+@layer components {
+  .analysis-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .analysis-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tab-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .tab-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .tab-button:focus-visible {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--color-primary);
+    outline-offset: 2px;
+  }
+  
+  .tab-button.active {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  
+  .tab-button:not(.active) {
+    color: #4b5563;
+  }
+  
+  .tab-button:not(.active):hover {
+    color: var(--color-primary);
+    background-color: rgba(143, 170, 143, 0.1);
+  }
+  
+  .score-bar-container {
+    width: 100%;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    height: 0.5rem;
+  }
+  
+  .score-bar-fill {
+    background: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
+    height: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.5s cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .capture-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    background-color: #ef4444;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .capture-button:hover {
+    background-color: #dc2626;
+  }
+  
+  .capture-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .capture-button:focus-visible {
+    box-shadow: 0 0 0 4px #fecaca;
+  }
+  
+  .file-dropzone {
+    border: 2px dashed #d1d5db;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .file-dropzone:hover {
+    border-color: var(--color-primary);
+    background-color: rgba(143, 170, 143, 0.05);
+  }
+  
+  .action-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: background-color 0.2s ease-in-out;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .action-button:hover {
+    background-color: #7a9a7a;
+  }
+  
+  .action-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .action-button:focus-visible {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--color-primary);
+  }
+  
+  .secondary-button {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: var(--color-primary);
+    font-weight: 500;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-primary);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .secondary-button:hover {
+    background-color: rgba(143, 170, 143, 0.05);
+  }
+  
+  .secondary-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .secondary-button:focus-visible {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--color-primary);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-primary:hover {
+    background-color: rgba(143, 170, 143, 0.9);
+  }
+  
+  .btn-primary:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .btn-primary:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-primary-gray), 0 0 0 4px rgba(143, 170, 143, 0.3);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-primary-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-secondary:hover {
+    background-color: rgba(143, 170, 143, 0.05);
+  }
+  
+  .btn-secondary:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  .btn-secondary:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-primary-gray), 0 0 0 4px rgba(143, 170, 143, 0.3);
+  }
+  
+  .card {
+    background-color: var(--color-primary-white);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .form-input:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px rgba(143, 170, 143, 0.3);
+    border-color: transparent;
+  }
+  
+  .badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+  }
+  
+  .badge-success {
+    background-color: rgba(143, 170, 143, 0.1);
+    color: var(--color-status-success);
+  }
+  
+  .badge-warning {
+    background-color: rgba(224, 193, 91, 0.1);
+    color: var(--color-status-warning);
+  }
+  
+  .badge-danger {
+    background-color: rgba(212, 138, 138, 0.1);
+    color: var(--color-status-danger);
+  }
+}
+
+/* 动画效果 */
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .text-shadow {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 响应式断点补充 */
+@layer utilities {
+  @media (min-width: 640px) {
+    .sm\:container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .md\:container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .lg\:container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .xl\:container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .\32 xl\:container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+}
